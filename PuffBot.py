@@ -10,7 +10,7 @@ def is_dir(dirname):
     else:
         return dirname
 
-# Get cmd line arguments
+# Get cmd line argument
 parser = argparse.ArgumentParser(description='Run SheikBot in Dolphin')
 parser.add_argument('--dolphinexecutable', '-e', type=is_dir,
                     help='Manually specify Dolphin executable')
@@ -25,28 +25,28 @@ console.connect()
 controller_bot.connect()
 controller_human.connect()
 
-# Main game loop
 
+# Main game loop
 while True:
     gamestate = console.step()
-
     if gamestate.menu_state in [melee.enums.Menu.IN_GAME, melee.enums.Menu.SUDDEN_DEATH]:
-        print("Current distance:" , gamestate.distance)
+        # If close enough to opponent, perform the rest attack (down b)
         if gamestate.distance < 4:
             print("Distance less than 4")
             controller_bot.press_button(melee.enums.Button.BUTTON_B)
             controller_bot.tilt_analog(melee.enums.Button.BUTTON_MAIN, 0.5, 0)
         else:
+            # Follow opponent horizontally
             onLeft = gamestate.players[1].x < gamestate.players[2].x
             controller_bot.tilt_analog(melee.enums.Button.BUTTON_MAIN, int(onLeft), 0.5)
             controller_bot.release_button(melee.enums.Button.BUTTON_B)
-
+            # Follow opponent vertically
             if gamestate.players[1].y < gamestate.players[2].y:
                 print("Jumping")
                 controller_bot.press_button(melee.enums.Button.BUTTON_X)
             else:
                 controller_bot.release_button(melee.enums.Button.BUTTON_X)
-
+    # Navigate through menus to start game
     else:
         melee.menuhelper.MenuHelper.menu_helper_simple(gamestate, 
                                                         controller_bot,
@@ -55,10 +55,3 @@ while True:
                                                         "",
                                                         autostart=False,
                                                         swag=True)
-#try:
-    # MAIN WHILE LOOP
-#except AttributeError:
-    #print("Thank you for playing!")
-
-    
-    
