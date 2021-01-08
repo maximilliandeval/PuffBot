@@ -5,6 +5,8 @@ PuffBot plays as the character Jigglypuff.  You may play with any character that
 
 ### Setup Instructions
 
+It is highly recommended to use Windows
+
 1. You will need a GameCube controller and GameCube Adapter to play.  These can be purchased at https://smashbros.nintendo.com/buy/accessories/ and https://www.amazon.com/Super-Smash-GameCube-Adapter-Wii-U/dp/B00L3LQ1FI respectively.
 
 2. Install and configure the Slippi emulator at https://slippi.gg/netplay.
